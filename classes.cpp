@@ -54,14 +54,6 @@ void tpk4::DayShift::setGrantedStudents(std::size_t number) {
   grantedStudents_ = number;
 }
 
-std::ostream &tpk4::operator<<(std::ostream &os, const tpk4::DayShift &group) {
-  os << "DayShift { " << "ID: \"" << group.ID_ << "\"\nCaf: " << group.cafNumber_ << "\tNumber of students: " <<
-  group.numberOfStudents_ << "\nNumber of years to study: " << group.periodOfStudy_ << "\nSpec: " <<
-  group.specialization_ << "\tGrant: " << group.grant_ << "\nNumber of granted students: " << group.grantedStudents_
-  << " }\n";
-  return os;
-}
-
 
 // 8-digit number, else will be filled with zeros
 void tpk4::PaidGroup::setContract(int number) {
@@ -80,3 +72,57 @@ void tpk4::PaidGroup::setContract(int number) {
 
   contract_ = divided;
 }
+
+std::string convert_spec(tpk4::Spec spec){
+  switch (spec) {
+    case tpk4::Default: return "Default";
+    case tpk4::Engineer: return "Engineer";
+    case tpk4::Scientist: return "Scientist";
+    case tpk4::Programmer: return "Programmer";
+    case tpk4::InfoSecurity: return "InformationalSecurity";
+    default:
+      return "N/A";
+  }
+}
+
+std::ostream &tpk4::operator<<(std::ostream &os, const tpk4::DayShift &group) {
+  os << "DayShift { " << "ID: \"" << group.ID_ << "\"\nCaf: " << group.cafNumber_ << "\t| Number of students: " <<
+     group.numberOfStudents_ << "\nNumber of years to study: " << group.periodOfStudy_ << "\nSpec: " <<
+     convert_spec(group.specialization_) << "\t| Grant: " << group.grant_ << "\nNumber of granted students: "
+     << group.grantedStudents_ << " }\n";
+  return os;
+}
+
+std::ostream &tpk4::operator<<(std::ostream &os, const tpk4::NightShift &group) {
+  os << "NightShift { ID: \"" << group.ID_ << "\"\nCaf: " << group.cafNumber_ << "\t| Number of students: " <<
+  group.numberOfStudents_ << "\nNumber of years to study: " << group.periodOfStudy_
+  << "\nForeign: ";
+  if (group.isForeign_){
+    os << "True ";
+  } else {
+    os << "False ";
+  }
+  os << "| Qualification: ";
+  if (group.qual_ == B){
+    os << "Bachelor degree ";
+  } else if (group.qual_ == M){
+    os << "Magistracy ";
+  } else if (group.qual_ == A){
+    os << "Postgraduate study ";
+  } else {
+    os << "N/A ";
+  }
+  os << " }\n";
+
+  return os;
+}
+
+std::ostream &tpk4::operator<<(std::ostream &os, const PaidGroup &group) {
+  os << "NightShift { ID: \"" << group.ID_ << "\"\nCaf: " << group.cafNumber_ << " | Number of students: " <<
+     group.numberOfStudents_ << "\nNumber of years to study: " << group.periodOfStudy_
+     << "\nContract: " << group.contract_ << "\nPayment: " << group.payment_
+     << "K }\n";
+  return os;
+}
+
+
