@@ -78,7 +78,12 @@ namespace tpk4 {
         void setID(const std::string& ID_name);
 
         // overloads
+        virtual void writeToOstream(std::ostream& os) const { };
+        friend std::ostream& operator<<(std::ostream& os, const Group& group) {
+          group.writeToOstream(os);
 
+          return os;
+        };
     };
 
     class DayShift : public Group {
@@ -119,7 +124,9 @@ namespace tpk4 {
         void setGrantedStudents(std::size_t number);
 
         // overloads
-        friend std::ostream& operator<<(std::ostream& os, const DayShift& group);
+        // instead of overloading <<
+        void writeToOstream(std::ostream& os) const override;
+        //friend std::ostream& operator<<(std::ostream& os, const DayShift& group);
     };
 
     class NightShift : public Group{
@@ -147,7 +154,8 @@ namespace tpk4 {
         void setQualification (Qualification q) { qual_ = q; }
 
         // overloads
-        friend std::ostream& operator<<(std::ostream& os, const NightShift& group);
+        void writeToOstream(std::ostream& os) const override;
+        //friend std::ostream& operator<<(std::ostream& os, const NightShift& group);
     };
 
     class PaidGroup : public Group{
@@ -185,7 +193,8 @@ namespace tpk4 {
 
 
         // overloads
-        friend std::ostream& operator<<(std::ostream& os, const PaidGroup& group);
+        void writeToOstream(std::ostream& os) const override;
+
     };
 
     // таблица из темплейтового вектора
@@ -228,7 +237,7 @@ namespace tpk4 {
         }
 
         friend std::ostream &operator<<(std::ostream &os, Table &tabl){
-          os << "Number of all groups --> " << tabl.tSize << "\n------\n";
+          os << "Number of all groups --> " << tabl.tSize;
           GroupID comparator = Day;
           for (int iter = 0; iter < 3; iter++){
             if (iter == 1){
@@ -243,15 +252,12 @@ namespace tpk4 {
             }
             for (auto i : tabl.table) {
               if (i->getUnique() == comparator){
-                os << i;
+                os << *i;
               }
             }
           }
-
-
           return os;
         }
-      // TO BE ADDED
     };
 
 }

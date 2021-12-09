@@ -30,6 +30,8 @@ void tpk4::Group::setID(const std::string& ID_name) {
   if (ID_name.length() < 1){
     ID_ = "";
     throw std::invalid_argument("Can't set empty ID!");
+  } else {
+    ID_ = ID_name;
   }
 }
 
@@ -73,6 +75,7 @@ void tpk4::PaidGroup::setContract(int number) {
   contract_ = divided;
 }
 
+
 std::string convert_spec(tpk4::Spec spec){
   switch (spec) {
     case tpk4::Default: return "Default";
@@ -85,44 +88,41 @@ std::string convert_spec(tpk4::Spec spec){
   }
 }
 
-std::ostream &tpk4::operator<<(std::ostream &os, const tpk4::DayShift &group) {
-  os << "DayShift { " << "ID: \"" << group.ID_ << "\"\nCaf: " << group.cafNumber_ << "\t| Number of students: " <<
-     group.numberOfStudents_ << "\nNumber of years to study: " << group.periodOfStudy_ << "\nSpec: " <<
-     convert_spec(group.specialization_) << "\t| Grant: " << group.grant_ << "\nNumber of granted students: "
-     << group.grantedStudents_ << " }\n";
-  return os;
+void tpk4::DayShift::writeToOstream(std::ostream &os) const {
+  os << "DayShift { " << "ID: \"" << ID_ << "\"\nCaf: " << cafNumber_ << "\t| Number of students: " <<
+     numberOfStudents_ << "\nNumber of years to study: " << periodOfStudy_ << "\nSpec: " <<
+     convert_spec(specialization_) << "\t| Grant: " << grant_ << "\nNumber of granted students: "
+     << grantedStudents_ << " }\n";
 }
 
-std::ostream &tpk4::operator<<(std::ostream &os, const tpk4::NightShift &group) {
-  os << "NightShift { ID: \"" << group.ID_ << "\"\nCaf: " << group.cafNumber_ << "\t| Number of students: " <<
-  group.numberOfStudents_ << "\nNumber of years to study: " << group.periodOfStudy_
-  << "\nForeign: ";
-  if (group.isForeign_){
+void tpk4::NightShift::writeToOstream(std::ostream &os) const {
+  os << "NightShift { ID: \"" << ID_ << "\"\nCaf: " << cafNumber_ << "\t| Number of students: " <<
+     numberOfStudents_ << "\nNumber of years to study: " << periodOfStudy_
+     << "\nForeign: ";
+  if (isForeign_){
     os << "True ";
   } else {
     os << "False ";
   }
   os << "| Qualification: ";
-  if (group.qual_ == B){
+  if (qual_ == B){
     os << "Bachelor degree ";
-  } else if (group.qual_ == M){
+  } else if (qual_ == M){
     os << "Magistracy ";
-  } else if (group.qual_ == A){
+  } else if (qual_ == A){
     os << "Postgraduate study ";
   } else {
     os << "N/A ";
   }
   os << " }\n";
-
-  return os;
 }
 
-std::ostream &tpk4::operator<<(std::ostream &os, const PaidGroup &group) {
-  os << "NightShift { ID: \"" << group.ID_ << "\"\nCaf: " << group.cafNumber_ << " | Number of students: " <<
-     group.numberOfStudents_ << "\nNumber of years to study: " << group.periodOfStudy_
-     << "\nContract: " << group.contract_ << "\nPayment: " << group.payment_
+
+void tpk4::PaidGroup::writeToOstream(std::ostream &os) const {
+  os << "NightShift { ID: \"" << ID_ << "\"\nCaf: " << cafNumber_ << " | Number of students: " <<
+     numberOfStudents_ << "\nNumber of years to study: " << periodOfStudy_
+     << "\nContract: " << contract_ << "\nPayment: " << payment_
      << "K }\n";
-  return os;
 }
 
 

@@ -3,6 +3,10 @@
 
 namespace Vector {
 
+    /*!
+     * Non-constant iterator for MyVector
+     * @tparam T Group-family class
+     */
     template<class T>
     class MyVecIt {
     private:
@@ -18,7 +22,7 @@ namespace Vector {
           ++m_data;
           return *this;
         }
-        MyVecIt<T> operator++(int num){
+        MyVecIt<T> operator++(int){
           MyVecIt<T> res(*this);
           ++m_data;
           return res;
@@ -27,7 +31,7 @@ namespace Vector {
           --m_data;
           return *this;
         }
-        MyVecIt<T> operator--(int num){
+        MyVecIt<T> operator--(int){
           MyVecIt<T> res(*this);
           --m_data;
           return res;
@@ -147,7 +151,7 @@ namespace Vector {
           if (len == 0){
             return true;
           } else {
-            false;
+            return false;
           };
         }
 

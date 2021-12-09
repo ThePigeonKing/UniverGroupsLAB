@@ -10,7 +10,7 @@ find_package(Threads REQUIRED)
 enable_testing()
 add_executable(
         tests
-        tests.cpp
+        tests/basic_tests.cpp
 )
 target_include_directories(tests PUBLIC ${GTEST_INCLUDE_DIRS})
 target_link_libraries(tests ${GTEST_BOTH_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
