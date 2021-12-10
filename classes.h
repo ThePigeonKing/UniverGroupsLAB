@@ -87,8 +87,7 @@ namespace tpk4 {
     };
 
     class DayShift : public Group {
-    private:
-        Spec specialization_;
+    private:        Spec specialization_;
         size_t grant_;
         size_t grantedStudents_;
 
