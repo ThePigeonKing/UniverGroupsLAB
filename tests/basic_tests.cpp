@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
-#include "../classes.h"
+#include "../classes/Table.h"
 
 TEST(Base_class, basic_init){
-  tpk4::Group test;
+  Group test;
 
   ASSERT_EQ(test.getUnique(), tpk4::Cringe);
   ASSERT_EQ(test.getCafNum(), 0);
@@ -12,7 +12,7 @@ TEST(Base_class, basic_init){
 }
 
 TEST(Base_class, param_init){
-  tpk4::Group test("B20-505", 31, 12, 4);
+  Group test("B20-505", 31, 12, 4);
   ASSERT_EQ(test.getUnique(), tpk4::Cringe);
   ASSERT_EQ(test.getCafNum(), 12);
   ASSERT_EQ(test.getPeriod(), 4);
@@ -21,7 +21,7 @@ TEST(Base_class, param_init){
 }
 
 TEST(Base_class, setters){
-  tpk4::Group test;
+  Group test;
 
   test.setID("LINE");
   test.setCafNum(12);
@@ -36,7 +36,7 @@ TEST(Base_class, setters){
 }
 
 TEST(Dayshift_test, basic_init){
-  tpk4::DayShift test;
+  DayShift test;
 
 
   ASSERT_EQ(test.getUnique(), tpk4::Day);
@@ -49,7 +49,7 @@ TEST(Dayshift_test, basic_init){
 }
 
 TEST(Dayshift_test, param_init){
-  tpk4::DayShift test("B20-505", 12, 31, 4, tpk4::Engineer, 3200, 3);
+  DayShift test("B20-505", 12, 31, 4, tpk4::Engineer, 3200, 3);
 
 
   ASSERT_EQ(test.getUnique(), tpk4::Day);
@@ -63,7 +63,7 @@ TEST(Dayshift_test, param_init){
 }
 
 TEST(NightShift_test, basic_init){
-  tpk4::NightShift test;
+  NightShift test;
 
 
   ASSERT_EQ(test.getUnique(), tpk4::Night);
@@ -76,7 +76,7 @@ TEST(NightShift_test, basic_init){
 }
 
 TEST(NightShift_test, param_init){
-  tpk4::NightShift test("B20-505", 12, 31, 4, true, tpk4::B);
+  NightShift test("B20-505", 12, 31, 4, true, tpk4::B);
 
 
   ASSERT_EQ(test.getUnique(), tpk4::Night);
@@ -89,7 +89,7 @@ TEST(NightShift_test, param_init){
 }
 
 TEST(PaidGroup_test, basic_init){
-  tpk4::PaidGroup test;
+  PaidGroup test;
 
 
   ASSERT_EQ(test.getUnique(), tpk4::Paid);
@@ -102,7 +102,7 @@ TEST(PaidGroup_test, basic_init){
 }
 
 TEST(PaidGroup_test, param_init){
-  tpk4::PaidGroup test("B20-505", 12, 31, 4, 128001, 120);
+  PaidGroup test("B20-505", 12, 31, 4, 128001, 120);
 
 
   ASSERT_EQ(test.getUnique(), tpk4::Paid);
