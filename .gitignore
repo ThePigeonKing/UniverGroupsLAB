@@ -4,5 +4,6 @@ cmake-build-debug-coverage
 html
 latex
 .idea
+DoxCfg
 *.exe
 *.out
